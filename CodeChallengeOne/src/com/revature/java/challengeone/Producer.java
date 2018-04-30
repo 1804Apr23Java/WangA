@@ -10,7 +10,11 @@ public class Producer extends Thread {
 	
 	public void run() {
 		while (!Thread.currentThread().isInterrupted()) {
-			basket.insert();
+			try {
+				basket.insert();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

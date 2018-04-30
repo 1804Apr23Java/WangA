@@ -10,7 +10,11 @@ public class Consumer extends Thread {
 
 	public void run() {
 		while(!Thread.currentThread().isInterrupted()) {
-			basket.delete();
+			try {
+				basket.delete();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
