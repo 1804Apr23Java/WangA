@@ -1,0 +1,44 @@
+.body {
+    background-color: #9bdadf;
+}
+h1 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.p {
+    text-align: left;
+    margin-left: 400px;
+    font-size: 25px;
+}
+
+.home {
+    text-align: center;
+    color: white;
+    background-color: #70b8bd;
+ }
+ 
+ /* Main content */
+ .main {
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
+ }
+
+ .container {
+    position: center;
+ }
+ 
+ /* Bottom right text */
+ .text-block {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+ }
+
+ .comment-form {
+    padding-top: 20px; 
+    padding-left: 20px;
+ }

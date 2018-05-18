@@ -1,0 +1,22 @@
+.navCities {
+    padding-left: 0mm;
+    background-color: black;
+}
+ 
+ /* Links inside the navbar */
+ .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    background: black;
+ }
+ 
+ /* Change background on mouse-over */
+ .navbar a:hover {
+    background:white;
+    color: black;
+ }
