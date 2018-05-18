@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Reimbursement Request Portal</title>
+	<link rel="stylesheet" href="homepage.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+	<body>
+		<h2>Welcome to the Reimbursement Request Portal!</h2>
+		<!-- Bootstrap form -->
+		 <form class = "comment-form">
+            <div class="form-group">
+                <label for="userID">Employee/Manager ID</label>
+                <input type="number" class="form-control" id="username" placeholder="Enter Employee or Manager ID">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password">
+            </div>
+        </form>
+        <div class="wrapper">
+            <button type="submit" id="loginButton" onclick=submitRequest()>Login</button>
+        </div>      
+	</body>
+</html>

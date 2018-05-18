@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Manager Reimbursement</title>
+	<link rel="stylesheet" href="homepage.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    	<style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+	<body>
+		<h2>Welcome to the Manager Reimbursement Homepage!</h2>
+		<h4>View All Employees</h4>
+		<!--  Display all employees from EMPLOYEES table -->
+		
+		<h4>Reimbursement Request Approval</h4>
+		<!-- Display all pending requests from REQUESTS table, check NOT IN RESOLUTIONS -->
+		
+		<div class="wrapper">
+            <button type="submit" id="submitButton" onclick=approveRequest()>Approve Request</button>
+        </div>
+		
+		<h4>Approved Requests</h4>
+		<!-- Display approved requests from RESOLUTIONS table, filter on MGR_ID -->
+		<table style="width: auto;" class="table table-bordered">
+  		<thead class="thead-light">
+	    <tr>
+	      <th style="width: 20%" scope="col">Request ID</th>
+	      <th style="width: 20%" scope="col">Employee ID</th>
+	      <th style="width: 20%" scope="col">Date Created</th>
+	      <th style="width: 40%" scope="col">Amount Requested ($)</th>
+	      <th scope="col">Receipt Upload</th>
+	      <th scope="col">Date Resolved</th>
+	    </tr>
+		</thead>
+		  <tbody>
+		    <tr>
+		      <th scope="row">1</th>
+		      <td>4/10/18</td>
+		      <td>100.00</td>
+		      <td>r1.jpg</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">2</th>
+		      <td>4/12/18</td>
+		      <td>200.00</td>
+		      <td>r2.jpg</td>
+		    </tr>
+		  </tbody>
+		</table>
+
+
+	</body>
+</html>

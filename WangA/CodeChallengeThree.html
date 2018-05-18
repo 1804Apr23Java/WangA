@@ -1,0 +1,105 @@
+<!DOCTYPE HTML/>
+<html>
+    <head>
+    <title>JS Bookshelf</title>
+    <meta charset="UTF-8">
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="CodeChallengeThree.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1>JavaScript Bookshelf</h1>
+
+        <!-- Card display-->
+        <div class="card-deck">
+            <div class="card">
+              <img class="card-img-top" src="gonewiththewind.jpg" alt="gonewiththewind">
+              <div class="card-body">
+                <h5 class="card-title">Gone With The Wind</h5>
+                <h6>Margaret Mitchell</h6>
+                <p class="card-text">Genre: Romance</p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="thebookthief.jpg" alt="thebookthief">
+              <div class="card-body">
+                <h5 class="card-title">The Book Thief</h5>
+                <h6>Markus Zusak</h6>
+                <p class="card-text">Genre: Young Adult</p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="houseofleaves.jpg" alt="houseofleaves">
+              <div class="card-body">
+                <h5 class="card-title">House of Leaves</h5>
+                <h6>Mark Z. Danielewski</h6>
+                <p class="card-text">Genre: Horror</p>
+              </div>
+            </div>
+          </div>
+       
+        <!--Add book button-->
+        <form class = "comment-form">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Title</label>
+                <input type="title" class="form-control" id="titleInput" placeholder="Enter book title">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput2">Author</label>
+                <input type="author" class="form-control" id="authorInput" placeholder="Enter author name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput3">Genre</label>
+                <input type="genre" class="form-control" id="genreInput" placeholder="Enter genre">
+            </div>
+        </form>
+        <div class="wrapper">
+            <button type="submit" id="submitButton" onclick=addBook()>Add Book</button>
+        </div>
+            
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+  
+        function showBook() {
+            var selectBook = document.getElementsByClassName("card-img-top");
+            selectBook.addEventListener("click",showOptions())
+        }
+        
+        function addBook(event) {
+            var newBook = {
+                "title": document.getElementbyID('titleInput').value,
+                "author": document.getElementById('authorInput').value,
+                "genre": document.getElementById('genreInput').value
+            }
+
+            document.createElement("card-title");
+            var node = document.CreateTextNode(title);
+            newBook.appendChild(node);
+            var element = document.getElementsByClassName("card");
+        }
+
+        function showOptions() {
+            //display Edit and Delete buttons
+        }
+
+        function editBook() {
+            //accept input for Title, Author, Genre
+        }
+
+        function deleteBook() {
+            //delete book element
+        } 
+
+        </script>
+    </body>
+</html>
