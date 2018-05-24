@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee Reimbursement</title>
+	<link rel="stylesheet" href="views/homepage.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    	<style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+	<body>
+		<h2>Welcome to the Employee Reimbursement Homepage!</h2>
+		<a href="logout">
+		<button id="logoutButton" style="float: right;">Logout</button>
+		</a>
+		<h4>Employee Information</h4>
+		<div id="empInfo">
+		</div>
+		<button id="editButton">Edit Information</button>
+		
+		<h4>Resolved Requests</h4>
+		<table style="width: auto;" class="table table-bordered">
+  		<thead class="thead-light">
+	    <tr>
+	      <th scope="col">Request ID</th>
+	      <th scope="col">Employee ID</th>
+	      <th scope="col">Comments</th>
+	      <th scope="col">Amount</th>
+	      <th scope="col">Date Created</th>
+	      <th scope="col">Manager ID</th>
+	      <th scope="col">Status</th>
+	      <th scope="col">Date Resolved</th>
+	    </tr>
+		</thead>
+		  <tbody id="resolvedReqs">
+		  </tbody>
+		</table>
+		
+		<h4>Pending Requests</h4>
+		<table style="width: auto;" class="table table-bordered">
+  		<thead class="thead-light">
+	    <tr>
+	      <th scope="col">Request ID</th>
+	      <th scope="col">Employee ID</th>
+	      <th scope="col">Comments</th>
+	      <th scope="col">Amount</th>
+	      <th scope="col">Date Created</th>
+	      <th scope="col">Resolution</th>
+	    </tr>
+		</thead>
+		  <tbody id="pendingReqs">
+		  </tbody>
+		</table>
+		
+		<h4>Reimbursement Request Submission</h4>
+		<!-- Bootstrap form -->
+		 <form class = "comment-form">
+            <div class="form-group">
+                <label for="reason">Reason for Reimbursement</label>
+                <input type="text" class="form-control" name="comment" id="comment" placeholder="(ie. relocation, office supplies, etc.)">
+            </div>
+            <div class="form-group">
+                <label for="amount">Requested Reimbursement</label>
+                <input type="number" class="form-control" name="amount" id="amount" placeholder="Enter exact amount">
+            </div>
+            <div class="form-group">
+                <label for="receipt">Receipt Upload</label>
+                <input type="file" class="form-control" name="receipt" id="receipt" placeholder="Upload receipt">
+            </div>
+        </form>
+        <div class="wrapper">
+            <a href="submitReq">
+            <button type="submit" id="submitButton">Submit Request</button>
+            </a>
+        </div>
+	</body>
+	<script src="scripts/empLogin.js"></script>
+</html>

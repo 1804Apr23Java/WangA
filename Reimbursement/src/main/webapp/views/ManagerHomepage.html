@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Manager Reimbursement</title>
+	<link rel="stylesheet" href="views/homepage.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    	<style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+	<body>
+		<h2>Welcome to the Manager Reimbursement Homepage!</h2>
+		<a href="logout">
+			<button id="logoutButton" style="float: right;">Logout</button>
+		</a>
+		<div id=mgrInfo>
+		</div>
+		
+		<h4>View All Employees</h4>
+		<table style="width: auto;" class="table table-bordered">
+  		<thead class="thead-light">
+	    <tr>
+	      <th style="width: 20%" scope="col">Employee ID</th>
+	      <th style="width: 20%" scope="col">First Name</th>
+	      <th style="width: 20%" scope="col">Last Name</th>
+	      <th style="width: 40%" scope="col">Email</th>
+	    </tr>
+		</thead>
+		  <tbody id="allEmp">
+		  </tbody>
+		</table>
+		<br>	
+		
+		<h4>Pending Requests</h4>
+		<table style="width: auto;" class="table table-bordered">
+  		<thead class="thead-light">
+	    <tr>
+	      <th scope="col">Request ID</th>
+	      <th scope="col">Employee ID</th>
+	      <th scope="col">Comments</th>
+	      <th scope="col">Amount</th>
+	      <th scope="col">Date Created</th>
+	      <th scope="col">Resolution</th>
+	    </tr>
+		</thead>
+		  <tbody id="pendingReqs">
+		  </tbody>
+		</table>
+        
+		<br>
+		<h4>Resolved Requests</h4>
+		<table style="width: auto;" class="table table-bordered">
+  		<thead class="thead-light">
+	    <tr>
+	      <th scope="col">Request ID</th>
+	      <th scope="col">Employee ID</th>
+	      <th scope="col">Comments</th>
+	      <th scope="col">Amount</th>
+	      <th scope="col">Date Created</th>
+	      <th scope="col">Manager ID</th>
+	      <th scope="col">Status</th>
+	      <th scope="col">Date Resolved</th>
+	    </tr>
+		</thead>
+		  <tbody id="resolvedReqs">
+		  </tbody>
+		</table>
+		
+	</body>
+	<script src="scripts/mgrLogin.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</html>
