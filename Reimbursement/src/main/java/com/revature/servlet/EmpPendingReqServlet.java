@@ -41,10 +41,12 @@ public class EmpPendingReqServlet extends HttpServlet {
 			int userID = (int) session.getAttribute("userID");
 			EmpDao e = new EmpDaoImpl();
 			List<Request> r = e.viewPending(userID);
+			
 			ObjectMapper om = new ObjectMapper();
 			om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 			String pendingReqs = om.writeValueAsString(r);
 			pw.write(pendingReqs);
+
 		} else {
 			response.sendRedirect("homepage");
 		}

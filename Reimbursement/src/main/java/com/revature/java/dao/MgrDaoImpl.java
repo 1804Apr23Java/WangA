@@ -39,8 +39,6 @@ public class MgrDaoImpl implements MgrDao {
 	}
 	
 	public List<Employee> getEmployees() {
-		int empID;
-		String firstName, lastName, password, email;
 		List<Employee> empList = new ArrayList<Employee>();
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
@@ -48,13 +46,15 @@ public class MgrDaoImpl implements MgrDao {
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				empID = rs.getInt("EMPLOYEE_ID");
-				firstName = rs.getString("EMP_FNAME");
-				lastName = rs.getString("EMP_LNAME");
-				password = rs.getString("PASSWORD");
-				email = rs.getString("EMAIL");
-				empList.add(new Employee(empID, firstName, lastName, password, email));
+				int empID = rs.getInt("EMPLOYEE_ID");
+				String firstName = rs.getString("EMP_FNAME");
+				String lastName = rs.getString("EMP_LNAME");
+				String password = rs.getString("PASSWORD");
+				String email = rs.getString("EMAIL");
+				Employee e = new Employee(empID, firstName, lastName, password, email);
+				empList.add(e);
 			}
+			
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,12 +64,12 @@ public class MgrDaoImpl implements MgrDao {
 		return empList;		
 	}
 	
-	public void approveRequest(Request r) {
+	public void approveRequest(int requestID) {
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
 			String sql = "INSERT INTO RESOLUTIONS(REQUEST_ID, MANAGER_ID, STATUS) VALUES(?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, r.getRequestID());
+			pstmt.setInt(1, requestID);
 			pstmt.setInt(2, Manager.getManagerID());
 			pstmt.setString(3,"APPROVED");
 			pstmt.executeQuery();
@@ -81,12 +81,12 @@ public class MgrDaoImpl implements MgrDao {
 		}
 	}
 
-	public void denyRequest(Request r) {
+	public void denyRequest(int requestID) {
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
 			String sql = "INSERT INTO RESOLUTIONS(REQUEST_ID, MANAGER_ID, STATUS) VALUES(?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, r.getRequestID());
+			pstmt.setInt(1, requestID);
 			pstmt.setInt(2, Manager.getManagerID());
 			pstmt.setString(3,"DENIED");
 			pstmt.executeQuery();
@@ -189,10 +189,11 @@ public class MgrDaoImpl implements MgrDao {
 			pstmt.setInt(1, mgrID);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
+				int managerID = rs.getInt("MANAGER_ID");
 				String firstName = rs.getString("MGR_FNAME");
 				String lastName = rs.getString("MGR_LNAME");
 				String password = rs.getString("PASSWORD");
-				m = new Manager(mgrID, firstName, lastName, password);
+				m = new Manager(managerID, firstName, lastName, password);
 			}	
 			con.close();
 		} catch (SQLException e) {

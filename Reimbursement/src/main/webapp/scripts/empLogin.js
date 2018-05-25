@@ -19,7 +19,7 @@ function populateEmployeeInfo(xhr) {
 		var res = JSON.parse(xhr.responseText);
 		console.log(res);
 		var header = document.createElement("H6");
-		var text1 = document.createTextNode("Employee ID: " + res.employeeID);
+		var text1 = document.createTextNode("Employee ID: " + res.empID);
 		var text2 = document.createTextNode("Name: " + res.firstName + " " + res.lastName);
 		var text3 = document.createTextNode("Email: " + res.email);
 		header.appendChild(text1);
@@ -39,7 +39,7 @@ function populatePendingRequests(xhr) {
 		console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
 		console.log(res);
-		var table = document.getElementById("pendingReqs");
+		let table = document.getElementById("pendingReqs");
 		for (var x in res) {
 			var row = table.insertRow(0);
 			var reqId = res[x].requestID;
@@ -85,7 +85,7 @@ function populateResolvedRequests(xhr) {
 		console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
 		console.log(res);
-		var table = document.getElementById("resolvedReqs");
+		let table = document.getElementById("resolvedReqs");
 		for (var x in res) {
 			var row = table.insertRow(0);
 			var reqId = res[x].requestID;
@@ -114,30 +114,7 @@ function populateResolvedRequests(xhr) {
 				cell7.innerHTML = status;
 				cell8.innerHTML = dateResolved;
 			}
-		}
-	} else {
-		window.location = "http://localhost:8080/Reimbursement/homepage";
-	}
-}
-
-function getRequestInfo(xhr) {
-	if (xhr.responseText) {
-		console.log(xhr.responseText);
-		var res = JSON.parse(xhr.responseText);
-		console.log(res);
-		if (res.id) {
-			document.getElementById("rId").innerHTML = res.id;
-			document.getElementById("reqNotes").innerHTML = res.reqNotes;
-			document.getElementById("amount").innerHTML = res.amount;
-			document.getElementById("reqDate").innerHTML = res.reqDate;
-			// document.getElementById("reqImg").innerHTML = res.img;
-			if(res.img === 'No file has been uploaded') {
-				document.getElementById("reqImg").innerHTML = res.img;
-			} else {
-				document.getElementsByTagName("IMG")[0].setAttribute("src", "Project_1/images/"+res.img);
-			}
-		} else {
-			window.location = "http://localhost:8080/Reimbursement/homepage";
+			sendAjaxGet("http://localhost:8080/Reimbursement/empPendingReq", populatePendingRequests);
 		}
 	} else {
 		window.location = "http://localhost:8080/Reimbursement/homepage";
@@ -147,6 +124,5 @@ function getRequestInfo(xhr) {
 window.onload = function() {
 	console.log("executed window.onload");
 	sendAjaxGet("http://localhost:8080/Reimbursement/empInfo", populateEmployeeInfo);
-	sendAjaxGet("http://localhost:8080/Reimbursement/empPendingReq", populatePendingRequests);
 	sendAjaxGet("http://localhost:8080/Reimbursement/empResolvedReq", populateResolvedRequests);
 }

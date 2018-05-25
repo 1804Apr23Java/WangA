@@ -57,7 +57,7 @@
 		
 		<h4>Reimbursement Request Submission</h4>
 		<!-- Bootstrap form -->
-		 <form class = "comment-form">
+		 <form class = "comment-form" action="http://localhost:8080/Reimbursement/submitReq" method="post">
             <div class="form-group">
                 <label for="reason">Reason for Reimbursement</label>
                 <input type="text" class="form-control" name="comment" id="comment" placeholder="(ie. relocation, office supplies, etc.)">
@@ -70,12 +70,11 @@
                 <label for="receipt">Receipt Upload</label>
                 <input type="file" class="form-control" name="receipt" id="receipt" placeholder="Upload receipt">
             </div>
+            <div class="wrapper">
+        		<button type="submit" id="submitButton">Submit Request</button>
+        	</div>
         </form>
-        <div class="wrapper">
-            <a href="submitReq">
-            <button type="submit" id="submitButton">Submit Request</button>
-            </a>
-        </div>
+
 	</body>
 	<script src="scripts/empLogin.js"></script>
 </html>

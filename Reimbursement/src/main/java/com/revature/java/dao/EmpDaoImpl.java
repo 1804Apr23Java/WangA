@@ -39,15 +39,13 @@ public class EmpDaoImpl implements EmpDao {
 	public void submitRequest(int empID, Request r) {
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
-			String sql = "INSERT INTO REQUESTS(REQUEST_ID, EMPLOYEE_ID, COMMENTS, REQUEST_AMT, RECEIPT_IMG) VALUES(?,?,?,?,?)";
+			String sql = "INSERT INTO REQUESTS(EMPLOYEE_ID, COMMENTS, REQUEST_AMT, RECEIPT_IMG) VALUES(?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, r.getRequestID());
-			pstmt.setInt(2, empID);
-			pstmt.setString(3, r.getComment());
-			pstmt.setInt(4, r.getAmount());
-			pstmt.setString(5, r.getReceipt());
+			pstmt.setInt(1, empID);
+			pstmt.setString(2, r.getComment());
+			pstmt.setInt(3, r.getAmount());
+			pstmt.setString(4, r.getReceipt());
 			pstmt.executeQuery();
-			//JS print "Request submitted!"
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,13 +61,14 @@ public class EmpDaoImpl implements EmpDao {
 			String sql = "SELECT * FROM REQUESTS LEFT JOIN RESOLUTIONS ON REQUESTS.REQUEST_ID = RESOLUTIONS.REQUEST_ID WHERE RESOLUTIONS.MANAGER_ID IS NULL AND EMPLOYEE_ID = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, empID);
+			
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				int requestID = rs.getInt("REQUEST_ID");
 				int employeeID = rs.getInt("EMPLOYEE_ID");
 				String comments = rs.getString("COMMENTS");
 				int amount = rs.getInt("REQUEST_AMT");
-				String receipt = rs.getString("PASSWORD");
+				String receipt = rs.getString("RECEIPT_IMG");
 				Date dateCreated = rs.getDate("DATE_CREATED");
 				reqList.add(new Request(requestID, employeeID, comments, amount, receipt, dateCreated, 0, null, null));
 			}
@@ -87,6 +86,7 @@ public class EmpDaoImpl implements EmpDao {
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
 			String sql = "SELECT * FROM REQUESTS LEFT JOIN RESOLUTIONS ON REQUESTS.REQUEST_ID = RESOLUTIONS.REQUEST_ID WHERE EMPLOYEE_ID = ? AND MANAGER_ID IS NOT NULL";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, empID);
 			ResultSet rs = pstmt.executeQuery();
@@ -95,7 +95,7 @@ public class EmpDaoImpl implements EmpDao {
 				int employeeID = rs.getInt("EMPLOYEE_ID");
 				String comments = rs.getString("COMMENTS");
 				int amount = rs.getInt("REQUEST_AMT");
-				String receipt = rs.getString("PASSWORD");
+				String receipt = rs.getString("RECEIPT_IMG");
 				Date dateCreated = rs.getDate("DATE_CREATED");
 				int managerID = rs.getInt("MANAGER_ID");
 				String status = rs.getString("STATUS");

@@ -39,8 +39,10 @@ public class EmpResolvedReqServlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		if (session != null) {
 			int userID = (int) session.getAttribute("userID");
+			System.out.println("id is = " + userID);
 			EmpDao e = new EmpDaoImpl();
 			List<Request> r = e.viewResolved(userID);
+			System.out.println(r.toString());
 			ObjectMapper om = new ObjectMapper();
 			om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 			String resolvedReq = om.writeValueAsString(r);

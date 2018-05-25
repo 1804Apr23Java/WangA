@@ -1,27 +1,24 @@
 package com.revature.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.revature.java.dao.EmpDao;
-import com.revature.java.dao.EmpDaoImpl;
-import com.revature.java.domain.Request;
+import com.revature.java.dao.MgrDao;
+import com.revature.java.dao.MgrDaoImpl;
 
 /**
- * Servlet implementation class SubmitRequestServlet
+ * Servlet implementation class ApproveReqServlet
  */
-public class SubmitRequestServlet extends HttpServlet {
+public class ApproveReqServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubmitRequestServlet() {
+    public ApproveReqServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +27,21 @@ public class SubmitRequestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("HERE");
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("userID") != null) {
-			int userID = (int) session.getAttribute("userID");
-	        String comment = request.getParameter("comment");  
-	        String amount = request.getParameter("amount");
-	        int amt = Integer.parseInt(amount);
-	        Request r = new Request();
-	        r.setEmployeeID(userID);
-	        r.setComment(comment);
-	        r.setAmount(amt);
-	        EmpDao e = new EmpDaoImpl();
-	        e.submitRequest(userID, r);       
-	        request.getRequestDispatcher("/views/EmployeeHomepage.html").forward(request, response);
+			String requestID = request.getParameter("id");
+			int reqID = Integer.parseInt(requestID);
+	        MgrDao m = new MgrDaoImpl();
+	       	m.approveRequest(reqID);     
+	       	request.getRequestDispatcher("/views/ManagerHomepage.html").forward(request, response);
 		} else {
 			response.sendRedirect("homepage");
 		}

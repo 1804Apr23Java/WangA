@@ -135,4 +135,24 @@
     <servlet-name>EmpResolvedReqServlet</servlet-name>
     <url-pattern>/empResolvedReq</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveReqServlet</display-name>
+    <servlet-name>ApproveReqServlet</servlet-name>
+    <servlet-class>com.revature.servlet.ApproveReqServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveReqServlet</servlet-name>
+    <url-pattern>/approveReq/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DenyReqServlet</display-name>
+    <servlet-name>DenyReqServlet</servlet-name>
+    <servlet-class>com.revature.servlet.DenyReqServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DenyReqServlet</servlet-name>
+    <url-pattern>/denyReq</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -89,6 +89,18 @@ function populatePendingRequests(xhr) {
 				var approveButton = document.createElement("BUTTON");
 				approveButton.setAttribute("type","button");
 				approveButton.setAttribute("id","approveButton");
+				approveButton.addEventListener("click", ()=> {
+					var xhr = new XMLHttpRequest()
+					|| new ActiveXObject("Microsoft.HTTPRequest");
+					console.log('sdfsdf');
+					xhr.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							func(this);
+						}
+					};
+					xhr.open("POST", "approveReq/?id=" + reqId, true);
+					xhr.send();
+				});
 				var aButtonText = document.createTextNode("Approve");
 				approveButton.appendChild(aButtonText);
 				cell6.appendChild(approveButton);
@@ -96,6 +108,18 @@ function populatePendingRequests(xhr) {
 				var denyButton = document.createElement("BUTTON");
 				denyButton.setAttribute("type","button");
 				denyButton.setAttribute("id","denyButton");
+				denyButton.addEventListener("onclick", ()=> {
+					var xhr = new XMLHttpRequest()
+					|| new ActiveXObject("Microsoft.HTTPRequest");
+
+					xhr.onreadystatechange = function(){
+						if (this.readyState == 4 && this.status == 200) {
+							window.location.href = "manager";
+						}
+					};
+					xhr.open("POST", "http://localhost:8080/Reimbursement/denyReq/?id=" + reqId, true);
+					xhr.send();
+				});
 				var dButtonText = document.createTextNode("Deny");
 				denyButton.appendChild(dButtonText);
 				cell6.appendChild(denyButton);
