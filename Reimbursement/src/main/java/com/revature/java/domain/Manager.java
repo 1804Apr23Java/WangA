@@ -1,20 +1,24 @@
 package com.revature.java.domain;
 
 public class Manager {
-	private static int managerID;
-	private static String firstName;
-	private static String lastName;
-	private static String password;
+	private int managerID;
+	private String firstName;
+	private String lastName;
+	private String password;
 	
 	public Manager(int managerID, String firstName, String lastName, String password) {
 		super();
-		Manager.managerID = managerID;
-		Manager.firstName = firstName;
-		Manager.lastName = lastName;
-		Manager.password = password;
+		this.managerID = managerID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+	}
+	
+	public Manager() {
+		super();
 	}
 
-	public static int getManagerID() {
+	public int getManagerID() {
 		return managerID;
 	}
 	
@@ -23,7 +27,7 @@ public class Manager {
 	}
 
 	public void setFirstName(String firstName) {
-		Manager.firstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -31,7 +35,7 @@ public class Manager {
 	}
 
 	public void setLastName(String lastName) {
-		Manager.lastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -39,6 +43,6 @@ public class Manager {
 	}
 
 	public void setPassword(String password) {
-		Manager.password = password;
+		this.password = password;
 	}
 }

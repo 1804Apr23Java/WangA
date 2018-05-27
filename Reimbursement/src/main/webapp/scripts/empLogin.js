@@ -34,7 +34,7 @@ function populateEmployeeInfo(xhr) {
 	}
 }
 
-function populatePendingRequests(xhr) {
+function populateEmpPendingRequests(xhr) {
 	if (xhr.responseText) {
 		console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
@@ -54,25 +54,11 @@ function populatePendingRequests(xhr) {
 				var cell3 = row.insertCell(2);
 				var cell4 = row.insertCell(3);
 				var cell5 = row.insertCell(4);
-				var cell6 = row.insertCell(5);
 				cell1.innerHTML = reqId;
 				cell2.innerHTML = empId;
 				cell3.innerHTML = comment;
 				cell4.innerHTML = amount;
 				cell5.innerHTML = dateCreated;
-				var approveButton = document.createElement("BUTTON");
-				approveButton.setAttribute("type","button");
-				approveButton.setAttribute("id","approveButton");
-				var aButtonText = document.createTextNode("Approve");
-				approveButton.appendChild(aButtonText);
-				cell6.appendChild(approveButton);
-				
-				var denyButton = document.createElement("BUTTON");
-				denyButton.setAttribute("type","button");
-				denyButton.setAttribute("id","denyButton");
-				var dButtonText = document.createTextNode("Deny");
-				denyButton.appendChild(dButtonText);
-				cell6.appendChild(denyButton);
 			}
 		}
 	} else {
@@ -80,7 +66,7 @@ function populatePendingRequests(xhr) {
 	}
 }
 
-function populateResolvedRequests(xhr) {
+function populateEmpResolvedRequests(xhr) {
 	if (xhr.responseText) {
 		console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
@@ -114,7 +100,6 @@ function populateResolvedRequests(xhr) {
 				cell7.innerHTML = status;
 				cell8.innerHTML = dateResolved;
 			}
-			sendAjaxGet("http://localhost:8080/Reimbursement/empPendingReq", populatePendingRequests);
 		}
 	} else {
 		window.location = "http://localhost:8080/Reimbursement/homepage";
@@ -124,5 +109,6 @@ function populateResolvedRequests(xhr) {
 window.onload = function() {
 	console.log("executed window.onload");
 	sendAjaxGet("http://localhost:8080/Reimbursement/empInfo", populateEmployeeInfo);
-	sendAjaxGet("http://localhost:8080/Reimbursement/empResolvedReq", populateResolvedRequests);
+	sendAjaxGet("http://localhost:8080/Reimbursement/empPendingReq", populateEmpPendingRequests);
+	sendAjaxGet("http://localhost:8080/Reimbursement/empResolvedReq", populateEmpResolvedRequests);
 }

@@ -67,15 +67,6 @@
     <url-pattern>/session</url-pattern>
   </servlet-mapping>
   <servlet>
-    <display-name>MgrReqByIdServlet</display-name>
-    <servlet-name>MgrReqByIdServlet</servlet-name>
-    <servlet-class>com.revature.servlet.MgrReqByIdServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MgrReqByIdServlet</servlet-name>
-    <url-pattern>/reqId</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description></description>
     <display-name>MgrInfoServlet</display-name>
     <servlet-name>MgrInfoServlet</servlet-name>

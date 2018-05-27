@@ -39,8 +39,10 @@ public class ApproveReqServlet extends HttpServlet {
 		if (session != null && session.getAttribute("userID") != null) {
 			String requestID = request.getParameter("id");
 			int reqID = Integer.parseInt(requestID);
+			String userID = (String) session.getAttribute("userID");
+			int mgrID = Integer.parseInt(userID);
 	        MgrDao m = new MgrDaoImpl();
-	       	m.approveRequest(reqID);     
+	       	m.approveRequest(reqID, mgrID);     
 	       	request.getRequestDispatcher("/views/ManagerHomepage.html").forward(request, response);
 		} else {
 			response.sendRedirect("homepage");

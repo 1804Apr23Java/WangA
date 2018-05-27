@@ -33,7 +33,7 @@ public class EmployeeTests {
 	@Test
 	public void testViewEmpInfo() {
 		Employee e = emp.viewEmpInfo(1200);
-		assertEquals(1200, Employee.getEmployeeID());
+		assertEquals(1200, e.getEmployeeID());
 		assertEquals("Collin", e.getFirstName());
 		assertEquals("Meaney", e.getLastName());
 	}

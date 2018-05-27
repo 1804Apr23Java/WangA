@@ -54,7 +54,6 @@ public class MgrDaoImpl implements MgrDao {
 				Employee e = new Employee(empID, firstName, lastName, password, email);
 				empList.add(e);
 			}
-			
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,13 +63,13 @@ public class MgrDaoImpl implements MgrDao {
 		return empList;		
 	}
 	
-	public void approveRequest(int requestID) {
+	public void approveRequest(int requestID, int mgrID) {
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
 			String sql = "INSERT INTO RESOLUTIONS(REQUEST_ID, MANAGER_ID, STATUS) VALUES(?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, requestID);
-			pstmt.setInt(2, Manager.getManagerID());
+			pstmt.setInt(2, mgrID);
 			pstmt.setString(3,"APPROVED");
 			pstmt.executeQuery();
 			con.close();
@@ -81,13 +80,13 @@ public class MgrDaoImpl implements MgrDao {
 		}
 	}
 
-	public void denyRequest(int requestID) {
+	public void denyRequest(int requestID, int mgrID) {
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
 			String sql = "INSERT INTO RESOLUTIONS(REQUEST_ID, MANAGER_ID, STATUS) VALUES(?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, requestID);
-			pstmt.setInt(2, Manager.getManagerID());
+			pstmt.setInt(2, mgrID);
 			pstmt.setString(3,"DENIED");
 			pstmt.executeQuery();
 			con.close();

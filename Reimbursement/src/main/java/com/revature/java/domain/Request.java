@@ -3,27 +3,27 @@ package com.revature.java.domain;
 import java.util.Date;
 
 public class Request {
-	private static int requestID;
-	private static int employeeID;
-	private static String comment;
-	private static int amount;
-	private static String receipt;
-	private static Date dateCreated;
-	private static int managerID;
-	private static String status;
-	private static Date dateResolved;
+	private int requestID;
+	private int employeeID;
+	private String comment;
+	private int amount;
+	private String receipt;
+	private Date dateCreated;
+	private int managerID;
+	private String status;
+	private Date dateResolved;
 	
 	public Request (int requestID, int employeeID, String comment, int amount, String receipt, Date dateCreated, int managerID, String status, Date dateResolved) {
 		super();
-		Request.requestID = requestID;
-		Request.employeeID = employeeID;
-		Request.comment = comment;
-		Request.amount = amount;
-		Request.receipt = receipt;
-		Request.dateCreated = dateCreated;
-		Request.managerID = managerID;
-		Request.status = status;
-		Request.dateResolved = dateResolved;
+		this.requestID = requestID;
+		this.employeeID = employeeID;
+		this.comment = comment;
+		this.amount = amount;
+		this.receipt = receipt;
+		this.dateCreated = dateCreated;
+		this.managerID = managerID;
+		this.status = status;
+		this.dateResolved = dateResolved;
 	}
 	
 	public Request () {
@@ -35,7 +35,7 @@ public class Request {
 	}
 
 	public void setComment(String comment) {
-		Request.comment = comment;
+		this.comment = comment;
 	}
 	
 	public String getReceipt() {
@@ -43,7 +43,7 @@ public class Request {
 	}
 
 	public void setReceipt(String receipt) {
-		Request.receipt = receipt;
+		this.receipt = receipt;
 	}
 
 	public Date getDateCreated() {
@@ -51,7 +51,7 @@ public class Request {
 	}
 
 	public void setDateCreated(Date dateCreated) {
-		Request.dateCreated = dateCreated;
+		this.dateCreated = dateCreated;
 	}
 
 	public int getRequestID() {
@@ -59,7 +59,7 @@ public class Request {
 	}
 	
 	public void setRequestID(int requestID) {
-		Request.requestID = requestID;
+		this.requestID = requestID;
 	}
 	
 	public int getEmployeeID() {
@@ -67,7 +67,7 @@ public class Request {
 	}
 	
 	public void setEmployeeID(int employeeID) {
-		Request.employeeID = employeeID;
+		this.employeeID = employeeID;
 	}
 	
 	public int getAmount() {
@@ -75,7 +75,7 @@ public class Request {
 	}
 	
 	public void setAmount(int amount) {
-		Request.amount = amount;
+		this.amount = amount;
 	}
 
 	public Date getDateResolved() {
@@ -83,7 +83,7 @@ public class Request {
 	}
 
 	public void setDateResolved(Date dateResolved) {
-		Request.dateResolved = dateResolved;
+		this.dateResolved = dateResolved;
 	}
 
 	public int getManagerID() {
@@ -91,7 +91,7 @@ public class Request {
 	}
 
 	public void setManagerID(int managerID) {
-		Request.managerID = managerID;
+		this.managerID = managerID;
 	}
 
 	public String getStatus() {
@@ -99,7 +99,7 @@ public class Request {
 	}
 	
 	public void setStatus(String status) {
-		Request.status = status;
+		this.status = status;
 	}
 
 	@Override

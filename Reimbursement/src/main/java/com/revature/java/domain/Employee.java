@@ -1,27 +1,31 @@
 package com.revature.java.domain;
 
 public class Employee {
-	private static int employeeID;
-	private static String firstName;
-	private static String lastName;
-	private static String password;
-	private static String email;
+	private int employeeID;
+	private String firstName;
+	private String lastName;
+	private String password;
+	private String email;
 	
 	public Employee(int employeeID, String firstName, String lastName, String password, String email) {
 		super();
-		Employee.employeeID = employeeID;
-		Employee.firstName = firstName;
-		Employee.lastName = lastName;
-		Employee.password = password;
-		Employee.email = email;
+		this.employeeID = employeeID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
+	}
+	
+	public Employee() {
+		super();
 	}
 
-	public static int getEmployeeID() {
+	public int getEmployeeID() {
 		return employeeID;
 	}
 
-	public static void setEmployeeID(int employeeID) {
-		Employee.employeeID = employeeID;
+	public void setEmployeeID(int employeeID) {
+		this.employeeID = employeeID;
 	}
 
 	public String getFirstName() {
@@ -29,7 +33,7 @@ public class Employee {
 	}
 
 	public void setFirstName(String firstName) {
-		Employee.firstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -37,7 +41,7 @@ public class Employee {
 	}
 
 	public void setLastName(String lastName) {
-		Employee.lastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -45,7 +49,7 @@ public class Employee {
 	}
 
 	public void setPassword(String password) {
-		Employee.password = password;
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -53,7 +57,7 @@ public class Employee {
 	}
 
 	public void setEmail(String email) {
-		Employee.email = email;
+		this.email = email;
 	}
 	
 }

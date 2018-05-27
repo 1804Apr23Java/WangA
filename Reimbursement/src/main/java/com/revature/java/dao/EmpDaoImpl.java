@@ -60,8 +60,7 @@ public class EmpDaoImpl implements EmpDao {
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
 			String sql = "SELECT * FROM REQUESTS LEFT JOIN RESOLUTIONS ON REQUESTS.REQUEST_ID = RESOLUTIONS.REQUEST_ID WHERE RESOLUTIONS.MANAGER_ID IS NULL AND EMPLOYEE_ID = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, empID);
-			
+			pstmt.setInt(1, empID);		
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				int requestID = rs.getInt("REQUEST_ID");
@@ -85,8 +84,7 @@ public class EmpDaoImpl implements EmpDao {
 		List<Request> reqList = new ArrayList<Request>();
 		PreparedStatement pstmt = null;
 		try (Connection con = ConnectionTest.getConnectionFromFile()) {
-			String sql = "SELECT * FROM REQUESTS LEFT JOIN RESOLUTIONS ON REQUESTS.REQUEST_ID = RESOLUTIONS.REQUEST_ID WHERE EMPLOYEE_ID = ? AND MANAGER_ID IS NOT NULL";
-			
+			String sql = "SELECT * FROM REQUESTS LEFT JOIN RESOLUTIONS ON REQUESTS.REQUEST_ID = RESOLUTIONS.REQUEST_ID WHERE EMPLOYEE_ID = ? AND MANAGER_ID IS NOT NULL";			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, empID);
 			ResultSet rs = pstmt.executeQuery();

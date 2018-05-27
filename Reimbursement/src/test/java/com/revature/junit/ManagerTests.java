@@ -67,7 +67,7 @@ public class ManagerTests {
 		Assert.assertNotNull(mgr);
 		Assert.assertEquals("Angela", mgr.getFirstName());
 		Assert.assertEquals("Wang", mgr.getLastName());
-		Assert.assertEquals(1311, Manager.getManagerID());
+		Assert.assertEquals(1311, mgr.getManagerID());
 	}
 
 }
