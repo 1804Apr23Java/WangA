@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>DisplayHome</display-name>
+    <servlet-name>DisplayHome</servlet-name>
+    <servlet-class>com.revature.java.servlet.DisplayHome</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayHome</servlet-name>
+    <url-pattern>/DisplayHome</url-pattern>
+  </servlet-mapping>
 </web-app>
