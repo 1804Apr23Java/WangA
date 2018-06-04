@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EatFitGo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+html,body {
+  height:100%;
+  width:100%;
+  margin:0;
+}
+body {
+  display:flex;
+}
+form {
+  margin:auto;/* nice thing of auto margin if display:flex; it center both horizontal and vertical :) */
+}
+
+</style>
+
+</head>
+
+<body style ="background-color:#804040">
+           <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch bg-white p-5 rounded rounded-lg-0 my-5 my-lg-0"
+                id="login-block">
+                <div class="m-auto w-lg-75 w-xl-50">
+                    <h2 class="text-info font-weight-light mb-5">EatFitGo</h2>
+                    <form method="post" action="login">
+                        <fieldset class="account-info">
+                            <label> username
+                                <input type="text" name="username">
+                            </label>
+                            <br>
+                            <label> Password
+                                <input type="password" name="password">
+                            </label>
+                        </fieldset>
+                        <fieldset class="account-action">
+                            <input class="btn" type="submit" name="submit" value="Login">
+                            <label>
+                                <input type="checkbox" name="remember"> Stay signed in
+                            </label>
+                        </fieldset>
+                    </form>
+                    <p class="mt-3 mb-0">
+                        <a href="PasswordReset.html" class="text-info small">Forgot your password?</a>
+                    </p>
+                </div>
+            </div>           
+  <script type="text/javascript">
+  	document.getElementById("login-block").style.alignSelf = "stretch";
+  	document.getElementById("myDiv").style.backgroundImage = "url('img_tree.png')"
+	document.getElementById("login-block").style.animationTimingFunction = "linear";
+  	document.getElementById("login-block").style.height = "50px";
+  </script>
+
+
+</body>
+</html>

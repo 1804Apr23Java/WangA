@@ -1,0 +1,21 @@
+server:
+  port: 8085
+  
+endpoints:
+  beans:
+    sensitive: false
+  mappings:
+    sensitive: false
+
+spring:
+  application:
+    name: greeting-app
+  datasource:
+    platform: oracle
+    url: jdbc:oracle:thin:@anqiwang2018.ccwk4x0q9dkx.us-east-2.rds.amazonaws.com:1521:ORCL
+    username: master
+    password: jdbcpass
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database: ORACLE
+    show-sql: true

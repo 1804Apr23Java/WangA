@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div>
+		<form action="ReimburseReport" method="post">
+			<div class="form-group">
+				<label for="username">User Name</label> <input type="text"
+					class="form-control" id="uName" name="username" placeholder="">
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-default btn-primary"
+					value="Update" />
+				<button class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+	function getReimburseInfo() {
+		var xhr = new XMLHttpRequest();
+		xhr
+				.open(
+						"GET",
+						"http://localhost:8089/BuildingWebApp/ReimburseReport",
+						true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				var resp = xhr.responseText;
+				document.getElementById("viewReimburselist").innerHTML = resp;
+			}
+		};
+		xhr.send();
+	};
+
+	window.onload = getReimburseInfo();
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,663 @@
+--Select all records from the Employee table.
+select * from employee;
+--Select all records from the Employee table where last name is King.
+SELECT
+    *
+FROM
+    employee
+WHERE
+    lastname = 'King';
+-- Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL.
+SELECT
+    *
+FROM
+    employee
+WHERE
+    employee.firstname = 'Andrew'
+    AND employee.reportsto IS NULL;
+--Select all albums in Album table and sort result set in descending order by title.
+select * from Album order by title desc;
+
+--Select first name from Customer and sort result set in ascending order by city
+
+SELECT
+    *
+FROM
+    album
+ORDER BY
+    title DESC;
+
+SELECT
+    firstname,
+    city
+FROM
+    customer
+ORDER BY
+    city ASC;
+
+--INSERT TWO NEW RECORD IN GENERA TABLE
+
+SELECT
+    *
+FROM
+    genre;
+
+INSERT INTO genre (
+    genreid,
+    name
+) VALUES (
+    26,
+    'KPOP'
+);
+
+INSERT INTO genre (
+    genreid,
+    name
+) VALUES (
+    27,
+    'MCU'
+);
+-- Insert two new records into Employee table
+
+SELECT
+    *
+FROM
+    employee;
+
+INSERT INTO employee VALUES (
+    11,
+    'Aashir',
+    'Shivam',
+    'IT Staff',
+    6,
+    '04-Feb-1992',
+    '23-Apr-2018',
+    '1208 S 62nd st',
+    'omaha',
+    'NE',
+    'USA',
+    '68105',
+    '+1(402)-499-9458',
+    '+1(402)-499-9458',
+    'shivam.aashir@gmail'
+);
+
+INSERT INTO employee VALUES (
+    10,
+    'Menard',
+    'kalie',
+    'IT Staff',
+    6,
+    '04-Feb-1994',
+    '23-Apr-2018',
+    '2512 r st',
+    'omaha',
+    'NE',
+    'USA',
+    '68105',
+    '+1(402)-499-9458',
+    '+1(402)-499-9458',
+    'kalie.menard23@gmail'
+);
+
+-- Insert two new records into Customer table
+--****************************************************************************
+-- Update Aaron Mitchell in Customer table to Robert Walter
+
+SELECT
+    *
+FROM
+    customer
+ORDER BY
+    firstname;
+
+UPDATE customer
+SET
+    customer.firstname = 'Robert',
+    customer.lastname = 'Walter'
+WHERE
+    customer.customerid = 32;
+--Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”	
+
+SELECT
+    *
+FROM
+    artist
+ORDER BY
+    name;
+
+UPDATE artist
+SET
+    artist.name = 'CCR'
+WHERE
+    artistid = 76;
+-- Select all invoices with a billing address like “T%” 
+
+SELECT
+    *
+FROM
+    invoice
+WHERE
+    billingaddress LIKE 'T%';
+
+--Select all invoices that have a total between 15 and 50
+
+SELECT
+    *
+FROM
+    invoice
+WHERE
+    total BETWEEN 15 AND 50; 
+--Select all employees hired between 1st of June 2003 and 1st of March 2004
+
+SELECT
+    *
+FROM
+    employee
+WHERE
+    hiredate BETWEEN '01-JUNE-2003' AND '01-MAR-2004';
+-- Delete a record in Customer table where the name is Robert Walter 
+DELETE FROM INVOICELINE WHERE INVOICEID  IN (116,342,245,61,290,50,268);
+DELETE FROM INVOICE WHERE CUSTOMERID = 32;
+delete  from customer where customerID =32;
+ROLLBACK;
+select * from customer order by lastname desc;
+select * from invoice ORDER BY CUSTOMERID DESC;
+
+--(There may be constraints that rely on this, find out how to resolve them).
+
+SELECT
+    *
+FROM
+    customer
+WHERE
+    firstname = 'Robert';
+
+DELETE form customer
+WHERE
+    customerid = 32;
+
+--Create a function that returns the current time.
+
+CREATE OR REPLACE FUNCTION current_time RETURN TIMESTAMP WITH TIME ZONE AS
+    time   TIMESTAMP WITH TIME ZONE;
+BEGIN
+    SELECT
+        current_timestamp
+    INTO time
+    FROM
+        dual;
+
+    dbms_output.put_line(TIME);
+    RETURN TIME;
+END;
+
+---Method of calling 
+--SELECT current_time FROM DUAL;
+
+SET SERVEROUTPUT ON
+DECLARE
+    time   TIMESTAMP WITH TIME ZONE;
+BEGIN
+    time := current_time ();
+END;
+--Calling the function 
+SELECT
+    current_timestamp
+FROM
+    dual;
+
+DECLARE
+    a   VARCHAR(100);
+BEGIN
+    a := current_time ();
+    dbms_output.put_line(a);
+END;
+-- create a function that returns the length of name in MEDIATYPE table
+
+select length(name) from mediatype;
+
+CREATE OR REPLACE FUNCTION length_medialength
+RETURN NUMBER as
+    v_length   NUMBER;
+BEGIN
+    SELECT
+        max(length(NAME))
+    INTO v_length
+    FROM
+        mediatype where rownum < 2;   
+
+    return v_length; 
+END;
+/
+SELECT length_medialength() FROM dual;
+/
+SET SERVEROUTPUT ON
+DECLARE
+    vr_length   NUMBER;
+BEGIN
+    FOR c IN (
+        SELECT
+            * 
+        FROM
+            mediatype
+    ) LOOP
+        vr_length := length_medialength();
+        dbms_output.put_line(vr_length);
+    END LOOP;
+END;
+
+SELECT
+    length(name)
+FROM
+    mediatype;
+
+SELECT
+    *
+FROM
+    mediatype;
+
+--System Defined Aggregate Functions
+-- Create a function that returns the average total of all invoices 
+--Creating a function
+
+SELECT
+    AVG(total)
+FROM
+    invoice;
+
+CREATE OR REPLACE FUNCTION avg_total RETURN NUMBER AS
+    v_total   NUMBER;
+BEGIN
+    SELECT
+        AVG(total)
+    INTO v_total
+    FROM
+        invoice ;
+
+    RETURN v_total;
+END;
+--Testing a function
+select avg_total() from dual;
+-- Difference in calling by the invoice and the dual 
+-- Multiple value per the num of the table 
+--User Defined Scalar Functions
+SET SERVEROUTPUT ON
+
+DECLARE
+    total   NUMBER;
+BEGIN
+    dbms_output.put_line(total);
+END;
+--Create a function that returns all employees who are born after 1968
+--User defined table value function 
+select FIRSTNAME from employee;
+CREATE OR REPLACE FUNCTION employee_dob (DATE_MENTIONED IN INT) 
+RETURN VARCHAR2 AS
+COMPLETENAME VARCHAR2(1000);
+BEGIN
+    FOR C IN ( SELECT LASTNAME ||' '|| FIRSTNAME AS FULLNAME , BIRTHDATE AS DOB FROM EMPLOYEE
+    WHERE TO_NUMBER(TO_CHAR(BIRTHDATE,'YYYY')) > DATE_MENTIONED)
+    LOOP
+    SELECT COMPLETENAME ||','|| C.FULLNAME INTO COMPLETENAME FROM DUAL;
+    END LOOP;
+    RETURN COMPLETENAME;
+END;
+
+--SELECT employee_dob(1968) FROM DUAL;
+
+--Create a function that returns the most expensive track
+
+CREATE OR REPLACE FUNCTION maximum_cost RETURN NUMBER AS
+    expensive   NUMBER;
+BEGIN
+    SELECT
+        MAX(unitprice)
+    INTO expensive
+    FROM
+        track;
+
+    RETURN expensive;
+END;
+--testting
+
+/
+
+SET SERVEROUTPUT ON
+
+DECLARE
+    maximum_price   NUMBER;
+BEGIN
+    maximum_price := maximum_cost ();
+    dbms_output.put_line('maximum unit cost'
+                           || ':'
+                           || maximum_price);
+END;
+
+SELECT
+    MAX(unitprice)
+FROM
+    track;
+
+---Create a stored procedure that selects the first and last names of all the employees.
+
+CREATE OR REPLACE PROCEDURE namelist As
+BEGIN
+FOR C IN (
+  SELECT
+        firstname,
+        lastname 
+         FROM
+        employee)
+        LOOP 
+dbms_output.put_line(C.FIRSTNAME ||','||C.LASTNAME);
+END LOOP;
+END namelist;
+
+--calling the above process
+EXECUTE namelist();
+
+-- Execute keyword for calling the process
+
+SET SERVEROUTPUT ON
+DECLARE
+    S SYS_REFCURSOR ;
+    firstname EMPLOYEE.FIRSTNAME%TYPE;
+    secondname  EMPLOYEE.LASTNAME%TYPE;
+BEGIN
+name(S);
+LOOP
+FETCH S INTO FIRSTNAME, SECONDNAME;
+EXIT WHEN S%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE (firstname || ':'||secondname);
+ END LOOP;
+ CLOSE S;
+END;
+
+--Create a stored procedure that updates the personal information of an employee.
+SELECT * FROM EMPLOYEE;
+
+CREATE OR REPLACE PROCEDURE UPDATE_EMPLOYEE 
+(
+  THE_EMPLOYEEID IN EMPLOYEE.EMPLOYEEID %TYPE,
+  NEW_LASTNAME IN EMPLOYEE.LASTNAME %TYPE,
+  NEW_FIRSTNAME IN EMPLOYEE.FIRSTNAME %TYPE,
+  NEW_TITLE IN EMPLOYEE.TITLE %TYPE,
+  NEW_REPORTSTO IN EMPLOYEE.REPORTSTO %TYPE,
+  NEW_BIRTHDATE IN EMPLOYEE.BIRTHDATE %TYPE,
+  NEW_HIREDATE IN EMPLOYEE.HIREDATE %TYPE,
+  NEW_ADDRESS IN EMPLOYEE.ADDRESS %TYPE,
+  NEW_CITY IN EMPLOYEE.CITY %TYPE,
+  NEW_STATE IN EMPLOYEE.STATE %TYPE,
+  NEW_COUNTRY in EMPLOYEE.COUNTRY %TYPE,
+  NEW_POSTALCODE in EMPLOYEE.POSTALCODE %TYPE,
+  NEW_PHONE in EMPLOYEE.PHONE %TYPE,
+  NEW_FAX in EMPLOYEE.FAX %TYPE,
+  NEW_EMAIL in  EMPLOYEE.EMAIL %TYPE 
+)
+IS
+v_employee_id number;
+BEGIN
+UPDATE employee
+SET
+    lastname = new_lastname,
+    firstname = new_firstname,
+    title = new_title,
+    reportsto = new_reportsto,
+    birthdate = new_birthdate,
+    hiredate = new_hiredate,
+    address = new_address,
+    city = new_city,
+    state = new_state,
+    country = new_country,
+    postalcode = new_postalcode,
+    phone = new_phone,
+    fax = new_fax,
+    email = new_email
+WHERE
+    employeeid =  the_employeeid ;
+
+end update_employee;
+CREATE OR REPLACE PROCEDURE UPDATE_EMPLOYEE 
+(
+  THE_EMPLOYEEID IN int,
+  NEW_LASTNAME IN varchar2,
+  NEW_FIRSTNAME IN varchar2,
+  NEW_TITLE IN varchar2,
+  NEW_REPORTSTO IN int,
+  NEW_BIRTHDATE IN date ,
+  NEW_HIREDATE IN date,
+  NEW_ADDRESS IN varchar2,
+  NEW_CITY IN varchar2,
+  NEW_STATE IN varchar2,
+  NEW_COUNTRY in varchar2,
+  NEW_POSTALCODE in varchar2,
+  NEW_PHONE in varchar2,
+  NEW_FAX in varchar2,
+  NEW_EMAIL in  EMPLOYEE.EMAIL %TYPE 
+)
+IS
+BEGIN
+UPDATE employee
+SET
+    lastname = new_lastname,
+    firstname = new_firstname,
+    title = new_title,
+    reportsto = new_reportsto,
+    birthdate = new_birthdate,
+    hiredate = new_hiredate,
+    address = new_address,
+    city = new_city,
+    state = new_state,
+    country = new_country,
+    postalcode = new_postalcode,
+    phone = new_phone,
+    fax = new_fax,
+    email = new_email;
+    
+end update_employee;
+
+select * from customer;
+--Test for the function
+ 
+rollback;
+commit; 
+
+begin
+ UPDATE_EMPLOYEE (9,
+    'Aashir',
+    'Shivam',
+    'IT',
+    6,
+    '04-Feb-1992',
+   '23-Apr-2018',
+    '1208 S 62nd st',
+    'omaha',
+    'NE',
+    'USA',
+    '68105',
+    '+1(402)-499-9458',
+    '+1(402)-499-9458',
+    'shivam.aashir@gmail');
+ end;
+    
+select * from employee;
+
+--Create a stored procedure that returns the managers of an employee.
+SELECT MGR.FIRSTNAME, MGR.LASTNAME, EMP.FIRSTNAME, EMP.LASTNAME INTO TEMP, TEMP2, TEMP3, TEMP4
+  FROM EMPLOYEE EMP
+  LEFT OUTER JOIN EMPLOYEE MGR 
+ON MGR.EMPLOYEEID = EMP.REPORTSTO;
+
+CREATE OR REPLACE PROCEDURE name_returnmanager ( employee_firstname in varchar, employee_lastname in varchar, report in number, S OUT SYS_REFCURSOR )is
+
+temp varchar2(25);
+temp2 varchar2(25);
+temp3 number;
+BEGIN
+ OPEN S FOR    SELECT
+        firstname, lastname , reportsto into temp , temp2, temp3
+         FROM
+        employee where EMPLOYEE.TITLE like '%ager';
+END name_returnmanager;
+
+
+SET SERVEROUTPUT ON
+DECLARE
+    S SYS_REFCURSOR ;
+    TITLE EMPLOYEE.TITLE%TYPE;    
+BEGIN
+name_returnmanager(S);
+LOOP
+FETCH S INTO TITLE;
+EXIT WHEN S%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE (TITLE);
+ END LOOP;
+ CLOSE S;
+END;
+
+
+ SELECT
+        TITLE
+         FROM
+        employee where EMPLOYEE.TITLE like '%ager';
+--Create a stored procedure that returns the name and company of a customer
+select * from customer;
+
+--Create a stored procedure that returns the name and company of a customer.
+
+CREATE OR REPLACE PROCEDURE Name_output_customer 
+(
+  fname out varchar2,
+  lname out varchar2,
+  company out varchar
+)
+IS
+BEGIN
+for c in (select firstname, lastname, company from customer)
+loop
+DBMS_OUTPUT.PUT_LINE (c.firstname||','||c.lastname||','||c.company);
+end loop;
+end Name_output_customer;
+
+declare
+fname varchar2(25);
+lname varchar2(25);
+compan varchar2(30);
+begin
+Name_output_customer(fname,lname,compan);
+end;
+
+--Transactions
+select * from customer;
+select * from invoice ORDER BY invoiceid desc;
+
+create or replace procedure delete_invoiceID 
+aS
+BEGIN
+DELETE FORM CUSTOMER WHERE customer.CUSTOMERID = 58;
+Delete from invoice where Invoice.invoiceid =412;
+end;
+
+execute delete_invoiceID(3,412);
+
+--Triggers
+-- Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+DROP TABLE orders_log;
+CREATE TABLE employee_log
+(
+  changed_on  TIMESTAMP NOT NULL ,
+  change_type CHAR(1)   NOT NULL
+ 
+  );
+
+CREATE or REPLACE TRIGGER employee_add_trigger 
+AFTER insert 
+ON employee 
+FOR EACH ROW 
+BEGIN 
+INSERT INTO employee_log(changed_on, CHANGE_TYPE)
+VALUES(SYSDATE, 'A');
+END;
+
+INSERT INTO employee(EMPLOYEEID, LASTNAME, FIRSTNAME,TITLE,REPORTSTO,BIRTHDATE,HIREDATE,ADDRESS,CITY,STATE,COUNTRY,POSTALCODE,PHONE,FAX,EMAIL) VALUES (
+    11,
+    'AashirBADAM',
+    'Shivam',
+    'IT Staff',
+    6,
+    '04-Feb-1992',
+    '23-Apr-2018',
+    '1208 S 62nd st',
+    'omaha',
+    'NE',
+    'USA',
+    '68105',
+    '+1(402)-499-9458',
+    '+1(402)-499-9458',
+    'shivam.aashir@gmail'
+);
+
+SELECT * FROM employee_LOG;
+
+--Create an after update trigger on the album table that fires after a row is inserted in the table
+
+CREATE TABLE album_log
+(
+  changed_on  TIMESTAMP NOT NULL ,
+  change_type CHAR(1)   NOT NULL
+ 
+  );
+
+CREATE or REPLACE TRIGGER album_trigger 
+AFTER update
+ON album 
+FOR EACH ROW 
+BEGIN 
+INSERT INTO album_log(changed_on, CHANGE_TYPE)
+VALUES(SYSDATE, 'u');
+END;
+
+--Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+
+CREATE TABLE customer_log
+(
+  changed_on  TIMESTAMP NOT NULL ,
+  change_type CHAR(1)   NOT NULL
+ 
+  );
+
+CREATE or REPLACE TRIGGER customer_trigger 
+AFTER DELETE
+ON customer 
+FOR EACH ROW 
+BEGIN 
+INSERT INTO customer_log(changed_on, CHANGE_TYPE)
+VALUES(SYSDATE, 'D');
+END;
+
+-- Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+
+select customer.firstname, customer.lastname, Invoice.InvoiceID from customer inner join Invoice on customer.customerID=invoice.invoiceID;
+
+--Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total.
+--Three kind of outer join 
+select customer.customerID, customer.firstname,customer.lastname, invoice.invoiceID, invoice.total from customer full outer join Invoice on customer.customerID=
+Invoice.invoiceID;
+
+
+select customer.customerID, customer.firstname,customer.lastname, invoice.invoiceID, invoice.total from customer left outer join Invoice on customer.customerID=
+Invoice.invoiceID;
+
+
+select customer.customerID, customer.firstname,customer.lastname, invoice.invoiceID, invoice.total from customer right outer join Invoice on customer.customerID=
+Invoice.invoiceID;
+
+--Create a right join that joins album and artist specifying artist name and title.
+ select artist.name, album.TITLE from artist right join album on artist.artistID= album.artistID;
+ 
+ -- Create a cross join that joins album and artist and sorts by artist name in ascending order.
+ select * from album cross join artist order by artist.name asc;
+ 
+ --Perform a self-join on the employee table, joining on the reportsto column. 
+ select * from employee A, employee B where a.reportsto<> B.reportsto;

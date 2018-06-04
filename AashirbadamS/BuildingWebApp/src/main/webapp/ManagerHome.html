@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head> </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/style.css" type="text/css">
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<body style= "background-color:#804040;">
+	<div class="topnav">
+		<div class="navbar">
+			<a href="EmployeeHomePage.html">Home</a>
+				<!--  <a href="PendingReimbursement.html">Pending Reimbursement</a>
+				<a href="Resolved Reimbursement">Resolved Reimbursement</a> -->
+				 <a href="Personal.html">Personal</a> <a href="ViewAllEmployeePage.html">Employee
+				List</a>
+				 <a href="UpdateEmployeeInfo.html">Employee Profile</a>
+				 <a href="ViewAllClosedReimburseAll.html">Closed Case</a>
+				 <a	href="AllpendingReimburse.html">Pending</a>		
+				 <a	href="ViewReimburmentInfoperuser.html">user report</a>		
+			 	<a href="http://localhost:8089/BuildingWebApp/Logout"> Logout </a>	
+		</div>
+	</div>
+
+
+	<div class="content-wrapper">
+        <div class="container-fluid">           
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="EmployeeHome.html"> DashBoard</a>
+                </li>
+                <li class="breadcrumb-item active">Personal Info</li>
+            </ol>
+            <div class="row">
+                <div class="col-12">
+                    <h1>Profile</h1>
+                    <p>You are: </p>
+                    <div id="resultTable">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr style="table-layout:fixed">
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>E-mail</th>
+                                                <th>Role</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="viewPersInfo" style="table-layout:fixed"> </tbody>                                    
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div>
+                    </div>
+                        <br>
+                        <br>
+                        <h4>Profile Update</h4>
+                        <p>Fill in the fields and click Update to update your user profile.</p>
+                        <form action="UpdateInfoServlet" method="post">
+                         <div class="form-group">
+                                <label for="username">User Name</label>
+                                <input type="text" class="form-control" id="uName" name="username" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="fName" name="firstName" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lName" name="lastName" placeholder="">
+                            </div>                           
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-default btn-primary" value="Update" />
+                                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+	<div>
+		<form action="Logout" method="get">
+			<input type="submit" class="btn btn-default btn-primary"
+				value="Logout" />
+			<button class="btn btn-default" data-dismiss="modal">Cancel</button>
+		</form>
+
+	</div>
+
+
+
+
+	<script type="text/javascript">
+		//  document.getElementById("viewPersInfo").innerHTML = "test";
+		function getPersInfo() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "http://localhost:8089/BuildingWebApp/userInfo ",
+					true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4) {
+					var resp = xhr.responseText;
+					document.getElementById("viewPersInfo").innerHTML = resp;
+				}
+			};
+			xhr.send();
+		};
+
+		window.onload = getPersInfo();
+	</script>
+		<script type="text/javascript">
+		//  document.getElementById("viewPersInfo").innerHTML = "test";
+/* 		function logout() {
+			 var req = new XMLHttpRequest();
+			  req.open("GET", "http://localhost:8089/BuildingWebApp/LogoutServlet", true);
+			  req.withCredentials = true;
+			  req.send();
+			
+		}; */
+		
+
+		window.onload = logout();		
+		document.body.style.backgroundColor = "grey";
+		document.body.classList.add('enlarged');
+		document.getElementById("myLink").href = "style2.css";
+		
+	</script>
+
+</body>
+
+</html>
